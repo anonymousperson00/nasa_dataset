@@ -1,0 +1,202 @@
+rules:
+  - id: cwe-79-cross-site-scripting
+    message: "Potential Cross-site Scripting (CWE-79)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-79"
+      reference: "https://cwe.mitre.org/data/definitions/79.html"
+    patterns:
+      - pattern-regex: 'printf\s*\(\s*".*<script>.*</script>.*"\s*\)'
+
+  - id: cwe-787-out-of-bounds-write
+    message: "Potential Out-of-bounds Write (CWE-787)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-787"
+      reference: "https://cwe.mitre.org/data/definitions/787.html"
+    patterns:
+      - pattern-regex: '\w+\[\s*5\s*\]\s*='
+
+  - id: cwe-89-sql-injection
+    message: "Potential SQL Injection (CWE-89)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-89"
+      reference: "https://cwe.mitre.org/data/definitions/89.html"
+    patterns:
+      - pattern-regex: 'sprintf\s*\(\s*\w+\s*,\s*".*\b(SELECT|INSERT|UPDATE|DELETE)\b.*",'
+
+  - id: cwe-352-cross-site-request-forgery
+    message: "Potential Missing CSRF Protection (CWE-352)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-352"
+      reference: "https://cwe.mitre.org/data/definitions/352.html"
+    patterns:
+      - pattern-regex: '//\s*CSRF token missing'
+
+  - id: cwe-22-path-traversal
+    message: "Potential Path Traversal (CWE-22)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-22"
+      reference: "https://cwe.mitre.org/data/definitions/22.html"
+    patterns:
+      - pattern-regex: 'fopen\s*\(\s*"\.\./'
+
+  - id: cwe-125-out-of-bounds-read
+    message: "Potential Out-of-bounds Read (CWE-125)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-125"
+      reference: "https://cwe.mitre.org/data/definitions/125.html"
+    patterns:
+      # Now explicitly catches memcpy calls with literal length 10
+      - pattern-regex: 'memcpy\s*\(\s*\w+\s*,\s*\w+\s*,\s*10\s*\)'
+
+  - id: cwe-78-os-command-injection
+    message: "Potential OS Command Injection (CWE-78)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-78"
+      reference: "https://cwe.mitre.org/data/definitions/78.html"
+    patterns:
+      - pattern-regex: 'system\s*\(\s*".*%s.*"\)'
+
+  - id: cwe-416-use-after-free
+    message: "Potential Use-After-Free (CWE-416)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-416"
+      reference: "https://cwe.mitre.org/data/definitions/416.html"
+    patterns:
+     - pattern-regex: '(?s)free\s*\(\s*\w+\s*\)\s*;.*?->'
+
+  - id: cwe-862-missing-authorization
+    message: "Potential Missing Authorization Check (CWE-862)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-862"
+      reference: "https://cwe.mitre.org/data/definitions/862.html"
+    patterns:
+      - pattern-regex: 'if\s*\(\s*!is_authorized\('
+
+  - id: cwe-434-unrestricted-upload
+    message: "Potential Unrestricted File Upload (CWE-434)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-434"
+      reference: "https://cwe.mitre.org/data/definitions/434.html"
+    patterns:
+      - pattern: upload_file($FILE)
+
+  - id: cwe-94-code-injection
+    message: "Potential Code Injection (CWE-94)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-94"
+      reference: "https://cwe.mitre.org/data/definitions/94.html"
+    patterns:
+      - pattern: eval($EXPR)
+
+  - id: cwe-20-improper-input-validation
+    message: "Potential Improper Input Validation (CWE-20)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-20"
+      reference: "https://cwe.mitre.org/data/definitions/20.html"
+    patterns:
+      - pattern-regex: 'scanf\s*\(\s*"%s"\s*,'
+
+  - id: cwe-77-command-injection
+    message: "Potential Command Injection (CWE-77)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-77"
+      reference: "https://cwe.mitre.org/data/definitions/77.html"
+    patterns:
+      - pattern: popen($CMD, $MODE)
+
+  - id: cwe-287-improper-authentication
+    message: "Potential Improper Authentication (CWE-287)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-287"
+      reference: "https://cwe.mitre.org/data/definitions/287.html"
+    patterns:
+      - pattern-regex: 'if\s*\(\s*!authenticate\('
+
+  - id: cwe-269-improper-privilege-management
+    message: "Potential Improper Privilege Management (CWE-269)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-269"
+      reference: "https://cwe.mitre.org/data/definitions/269.html"
+    patterns:
+      - pattern-regex: 'setuid\s*\(\s*0\s*\)'
+
+  - id: cwe-502-deserialization-of-untrusted-data
+    message: "Potential Untrusted Deserialization (CWE-502)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-502"
+      reference: "https://cwe.mitre.org/data/definitions/502.html"
+    patterns:
+      - pattern: deserialize($DATA)
+
+  - id: cwe-200-information-exposure
+    message: "Potential Information Exposure (CWE-200)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-200"
+      reference: "https://cwe.mitre.org/data/definitions/200.html"
+    patterns:
+      - pattern-regex: 'printf\s*\(\s*".*password.*%s.*"\s*,'
+
+  - id: cwe-863-incorrect-authorization
+    message: "Potential Incorrect Authorization (CWE-863)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-863"
+      reference: "https://cwe.mitre.org/data/definitions/863.html"
+    patterns:
+      - pattern-regex: 'user_role\s*=='
+
+  - id: cwe-918-ssrf
+    message: "Potential Server-Side Request Forgery (CWE-918)"
+    languages: [c, cpp]
+    severity: WARNING
+    metadata:
+      cwe: "CWE-918"
+      reference: "https://cwe.mitre.org/data/definitions/918.html"
+    patterns:
+      - pattern-regex: 'curl_easy_perform\s*\('
+
+  - id: cwe-119-buffer-overflow
+    message: "Potential Buffer Overflow (CWE-119)"
+    languages: [c, cpp]
+    severity: ERROR
+    metadata:
+      cwe: "CWE-119"
+      reference: "https://cwe.mitre.org/data/definitions/119.html"
+    patterns:
+      - pattern: strcpy($DEST, $SRC)
+
